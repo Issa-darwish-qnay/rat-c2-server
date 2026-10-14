@@ -4,8 +4,8 @@ const fs = require('fs');
 
 class TelegramBot {
  constructor(token, chatId) {
- this.token = 7561698582:AAFhMEKlCgKx136YBZ-p_f4Glg-cpzsQsyQ;
- this.chatId = 6837315281;
+ this.token = token;
+ this.chatId = chatId;
  this.baseUrl = `https://api.telegram.org/bot${this.token}`;
  }
 
